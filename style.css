@@ -69,11 +69,8 @@ p {
     padding: 35px 0;
 }
 
-.header__logo {
-    display: flex;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
+.header__logo img {
+    width: 250px;
 }
 
 .header__logo span {
@@ -113,45 +110,119 @@ p {
 /* Intro
 ===================*/
 
-.intro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 750px;
-    padding-top: 100px;
-
-    background: url("img/intro.jpg") center no-repeat;
-    background-size: cover;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-
-.intro__inner {
-    width: 100%;
-    max-width: 970px;
-    margin: 0 auto;
-
-    text-align: center;
+:root {
+	--index: calc(1vw + 1vh);
+	--transition: 1.5s cubic-bezier(.05, .5, 0, 1);
 }
-
-.intro__title {
-    margin: 0 0 30px;
-
-    font-family: 'Open Sans', sans-serif;
-    font-size: 65px;
-    line-height: 1.1;
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
+@font-face {
+	font-family: kamerik-3d;
+	src: url(C:\Users\miras\Downloads\parallax-3d-lens-effect-website\html\fonts);
+	font-weight: 900;
 }
-
-.intro__subtitle {
-    margin-bottom: 60px;
-
-    font-size: 22px;
-    color: #fff;
-    line-height: 1.5;
-    font-weight: 400;
+@font-face {
+	font-family: merriweather-italic-3d;
+	src: url(../fonts/merriweather-regular-italic.woff2);
 }
-
+body {
+	background-color: #fff;
+	color: #fff;
+	font-family: kamerik-3d;
+}
+.logo {
+	--logo-size: calc(var(--index) * 7.8);
+	width: var(--logo-size);
+	height: var(--logo-size);
+	background-repeat: no-repeat;
+	position: absolute;
+	left: calc(51% - calc(var(--logo-size) / 2));
+	top: calc(var(--index) * 2.8);
+	z-index: 1;
+}
+.layers {
+	perspective: 1000px;
+	overflow: hidden;
+}
+.layers__container {
+	height: 100vh;
+	min-height: 500px;
+	transform-style: preserve-3d;
+	transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+	will-change: transform;
+	transition: transform var(--transition);
+}
+.layers__item {
+	position: absolute;
+	inset: -5vw;
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.layer-1 {
+	transform: translateZ(-55px) scale(1.06);
+	filter: brightness(95%);
+}
+.layer-2 {
+	transform: translateZ(80px) scale(.88);
+}
+.layer-3 {
+	transform: translateZ(180px) scale(.8);
+}
+.layer-4 {
+	transform: translateZ(190px) scale(.9);
+}
+.layer-5 {
+	transform: translateZ(300px) scale(.9);
+}
+.layer-6 {
+	transform: translateZ(380px);
+}
+.hero-content {
+	font-size: calc(var(--index) * 2.9);
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: calc(var(--index) * -.15);
+	line-height: 1.35em;
+	margin-top: calc(var(--index) * 5.5);
+}
+.hero-content span {
+	display: block;
+}
+.hero-content__p {
+	text-transform: none;
+	font-family: merriweather-italic-3d;
+	letter-spacing: normal;
+	line-height: 1.5;
+    font-weight: 600;
+    font-size: calc(var(--index) * 2);
+}
+.button-start {
+	font-family: Arial;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: calc(var(--index) * .71);
+	letter-spacing: -.02vw;
+	padding: calc(var(--index) * .7) calc(var(--index) * 1.25);
+	background-color: transparent;
+	color: #fff;
+	border-radius: 10em;
+	border: rgb(255 255 255 / .4) 3px solid;
+	outline: none;
+	cursor: pointer;
+	margin-top: calc(var(--index) * 2.5);
+}
+.layer-4, .layer-5, .layer-6 {
+	pointer-events: none;
+}
+.mb-75 {
+    margin-bottom: 75px;
+}
 
 /* Button
 ===================*/
@@ -185,44 +256,6 @@ p {
 
 .btn--long {
     min-width: 280px;
-}
-
-/* News
-===================*/
-
-.news {
-    display: flex;
-}
-
-.news__main-new {
-    width: 60%;
-    background: url("img/works/.news-1.jpeg") center no-repeat;
-    background-size: cover;
-}
-
-.news__info {
-}
-
-.news__title {
-}
-
-.news__decs {
-}
-
-.news__additional-news {
-    width: 40%;
-}
-
-.news__mini-item {
-}
-
-.news__mini-img {
-}
-
-.news__mini-title {
-}
-
-.news__mini-date {
 }
 
 /* Features
@@ -328,13 +361,173 @@ p {
     color: #fff;
 }
 
+/* News
+-------------------------------------------- */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
+  .news-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #eaeaea;
+    animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+    margin-left: 10px;
+    /* height: 60vh; */
+  }
 
+  .main-article {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+    max-width: 70%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-right: 10px;
+    animation: bounce 1s ease-in-out; /* Add bounce animation */
+    cursor: pointer; /* Add pointer cursor to indicate clickability */
+    background-image: url('https://abai.kz/content/uploads/2019/08/NURN7758.jpg'); /* Add background image */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Set text color to white for better visibility */
+    display: flex;
+    flex-direction: column; /* Set flex direction to column */
+    justify-content: flex-end; /* Align content to the bottom */
+    height: 50vh; /* Set the height to 60% */
+  }
+
+  .main-article::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent black overlay */
+  }
+
+  .side-articles {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 50%; /* Set the height to 60% */
+  }
+
+  .small-article {
+    min-width: 200px;
+    max-width: 100%;
+    max-height: 60%;
+    padding: 4%;
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    animation: slideIn 1s ease-in-out; /* Add slide-in animation */
+  }
+
+  .beautiful-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #fdad1c; /* Blue color, change as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .small-article__text {
+    color: #000;
+  }
+
+  .beautiful-button:hover {
+    background-color: #0056b3; /* Darker blue on hover, change as needed */
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure button takes full height */
+  }
+
+  h2, h3 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  /* Define the fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Define the bounce animation */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Define the slide-in animation */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 
 /* Team
 ===================*/
+
 .team {
     margin: 100px 0 70px;
+}
+
+.team__block {
+}
+
+.block-title {
+}
+
+.block-title {
+    position: relative;
+    line-height: 1.2;
+    color: #151515;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 35px;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+
+.block-title::before {
+    position: absolute;
+    background: #fdad1c;
+    height: 4px;
+    content: '';
+    width: 27px;
+    bottom: 0;
+    left: 0
 }
 
 .team__inner {
@@ -443,9 +636,12 @@ p {
 /* Reviews
 ===================*/
 
-.reviews {
+.reviews__info {
     overflow: hidden;
     background-color: #fec04d;
+}
+
+.reviews__bg {
 }
 
 .reviews__slider {
@@ -490,16 +686,22 @@ p {
     margin-bottom: 25px;
 
     font-family: 'Cardo', sans-serif;
-    font-style: italic;
+    font-weight: 700;
     font-size: 36px;
     line-height: 1.2;
     color: #fff;
 }
+.reviews__texts {
+    margin-bottom: 25px;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #fff;
+    font-style: italic;
+}
 
 .reviews__author {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-size: 20px;
+    font-style: italic;
     color: #fff;
 }
 
@@ -544,16 +746,42 @@ p {
     opacity: 1;
 }
 
-/* Download
+/* Maps
 ===================*/
 
-.download {
-    margin: 90px 0;
-
-    text-align: center;
+/* Add animation styles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Optional: Slide in from the top */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.download__title {
+/* Apply animation to the map section */
+.map__item {
+    animation: fadeIn 1.5s ease-out; /* Adjust the duration and timing function as needed */
+}
+
+.map {
+    margin: 70px 0;
+}
+
+.map .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.map__info {
+    text-align: center;
+    flex-direction: column;
+}
+
+.map__title {
     margin-bottom: 10px;
 
     font-size: 28px;
@@ -561,7 +789,7 @@ p {
     font-weight: 300;
 }
 
-.download__text {
+.map__text {
     margin-bottom: 30px;
 
     font-size: 13px;
@@ -569,7 +797,21 @@ p {
     font-weight: 700;
     text-transform: uppercase;
 }
+.contact-info {
+    padding-bottom: 5px;
+}
 
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .map__google-map,
+    .map__info {
+        max-width: 100%;
+    }
+}
 
 
 /* Footer
@@ -692,6 +934,20 @@ p {
     /* Works */
     .works__item {
         width: 50%;
+    }
+
+}
+@media (max-width: 1400px) {
+    /* News */
+    .news-container {
+        display: block;
+    }
+    .map .container {
+        display: block;
+    }
+    .main-article {
+        max-width: 100%;
+        
     }
 }
 
